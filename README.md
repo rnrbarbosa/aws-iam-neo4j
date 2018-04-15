@@ -52,3 +52,10 @@ WITH count(p) as n, r, p
 WHERE n > 0 
 RETURN r,p
 ```
+
+### Show me the Policies, its Resources and Actions, and Users with Access
+```
+MATCH (r:IAM_Policy_Resource)<-[:HAS_RESOURCE]-(p:IAM_Policy)<-[:HAS_POLICY]-(u:IAM_User)
+MATCH (a:IAM_Policy_Action)<-[:HAS_ACTION]-(p:IAM_Policy)
+RETURN r,p,u,a
+```

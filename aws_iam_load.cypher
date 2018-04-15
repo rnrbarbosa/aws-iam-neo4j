@@ -50,7 +50,7 @@ UNWIND s.Action as act
 WITH p.PolicyName as pol, act as action
 MATCH (p1:IAM_Policy {name:pol})
 MERGE(a1:IAM_Policy_Action {action:action})
-CREATE(p1)-[:HAS_ACTION]->(a1)
+MERGE(p1)-[:HAS_ACTION]->(a1)
 
 // Create Policy Resources and relate it to the Policy
 CALL apoc.load.json("file:/Users/rnrbarbosa/Downloads/account_auth.json") YIELD value as row
@@ -62,7 +62,7 @@ UNWIND s.Resource as res
 WITH p.PolicyName as pol, res as resource
 MATCH (p1:IAM_Policy {name:pol})
 MERGE(r1:IAM_Policy_Resource {name:resource})
-CREATE(p1)-[:HAS_RESOURCE]->(r1)
+MERGE(p1)-[:HAS_RESOURCE]->(r1)
 
 
 // Load Services 
