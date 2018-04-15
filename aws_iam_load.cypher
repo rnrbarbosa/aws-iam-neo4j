@@ -26,9 +26,11 @@ CALL apoc.load.json("file:/Users/rnrbarbosa/Downloads/account_auth.json",
 '.RoleDetailList[*]') YIELD value as row
 UNWIND row.AttachedManagedPolicies as policy
 UNWIND policy as pol
-WITH row.RoleName as role, row.Path as path, row.Arn as arn, pol.PolicyName as pol
+WITH row.RoleName as role, row.Path as path, row.Arn as arn, pol
 MERGE(r:IAM_Role {name:role, path:path, arn:arn})
+MERGE(p:IAM_Policy {name:pol.PolicyName,arn:pol.PolicyArn})
 MERGE(r)-[:HAS_POLICY]->(p)
+
 
 // Create relationship btw Groups and Policies
 CALL apoc.load.json("file:/Users/rnrbarbosa/Downloads/account_auth.json",
