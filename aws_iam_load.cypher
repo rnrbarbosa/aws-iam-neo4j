@@ -87,7 +87,8 @@ WHERE stmt.Effect = 'Allow'
 UNWIND keys(stmt.Principal) AS key
 WITH role,key, stmt.Principal as princ
 WHERE key = 'AWS'
-MERGE(u:IAM_User {arn:princ[key]})
+MATCH(u:IAM_User {arn:princ[key]})
+MERGE(u:IAM_User {name:princ[key], arn:princ[key]})
 MERGE(r:IAM_Role {name:role})
-CREATE (u)-[:CAN_ASSUME_ROLE]->(r)
+MERGE (u)-[:CAN_ASSUME_ROLE]->(r)
 RETURN u,r
