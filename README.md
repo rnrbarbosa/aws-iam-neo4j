@@ -59,3 +59,4 @@ MATCH (r:IAM_Policy_Resource)<-[:HAS_RESOURCE]-(p:IAM_Policy)<-[:HAS_POLICY]-(u:
 MATCH (a:IAM_Policy_Action)<-[:HAS_ACTION]-(p:IAM_Policy)
 RETURN r,p,u,a
 ```
+![](./policy_users_actions_resources.png)
