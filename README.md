@@ -8,6 +8,13 @@ Run the following command to extract all your AWS IAM settings:
 aws iam get-account-authorization-details > account_auth.json
 ```
 
+## Enable JSON import on neo4j
+
+Enabled on the configuration of the database
+```
+apoc.import.file.enabled=true
+```
+
 ## Graph Schema
 
 ![AWS IAM Schema](./db_schema.png)
